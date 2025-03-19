@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+</head>
+<body>
+<h1>Bienvenido al Sistema</h1>
+<p>Inicio de sesión exitoso.</p>
+
+<!-- Mostrar el rol del usuario -->
+<p>Rol: <span th:text="${#authentication.authorities}"></span></p>
+
+<!-- Navegación según el rol -->
+<nav>
+    <ul>
+        <li><a href="/">Inicio</a></li>
+
+        <!-- Opciones para ADMIN -->
+        <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a href="/admin/dashboard">Dashboard Admin</a>
+        </li>
+        <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <a href="/admin/usuarios">Gestión de Usuarios</a>
+        </li>
+
+        <!-- Opciones para USUARIO -->
+        <li th:if="${#authorization.expression('hasRole(''USUARIO'')')}">
+            <a href="/user/perfil">Mi Perfil</a>
+        </li>
+        <li th:if="${#authorization.expression('hasRole(''USUARIO'')')}">
+            <a href="/user/reciclaje">Registrar Reciclaje</a>
+        </li>
+
+        <!-- Opciones para EMPRESA RECOLECTORA -->
+        <li th:if="${#authorization.expression('hasRole(''EMPRESA RECOLECTORA'')')}">
+            <a href="/empresa/recolecciones">Gestión de Recolecciones</a>
+        </li>
+        <li th:if="${#authorization.expression('hasRole(''EMPRESA RECOLECTORA'')')}">
+            <a href="/empresa/rutas">Consultar Rutas</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Formulario POST para cerrar sesión con token CSRF -->
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <button type="submit">Cerrar sesión</button>
+</form>
+
+</body>
+</html>
