@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/logout") // 🔥 Deshabilita CSRF solo en /logout
+                        .ignoringRequestMatchers("/logout", "/user/reciclaje/registrar", "/empresa-recolectora/aprobar/**") // 🔥 Deshabilita CSRF en estas rutas
                 )
                 .authorizeHttpRequests(auth -> {
                     logger.debug("Configurando autorizaciones de rutas.");

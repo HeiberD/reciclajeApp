@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Reciclaje</title>
+</head>
+<body>
+<h2>Registrar Reciclaje</h2>
+<form action="/user/reciclaje/registrar" method="post">
+    <!-- 🔥 Token CSRF obligatorio para evitar el error 403 -->
+    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+    <label>Material:</label>
+    <input type="text" name="material" required>
+    <br>
+
+    <label>Cantidad:</label>
+    <input type="number" step="0.01" name="cantidad" required>
+    <br>
+
+    <label>Unidad:</label>
+    <select name="unidad">
+        <option value="kg">Kilogramos</option>
+        <option value="litros">Litros</option>
+        <option value="unidades">Unidades</option>
+    </select>
+    <br>
+
+    <button type="submit">Registrar</button>
+</form>
+</body>
+</html>

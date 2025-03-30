@@ -9,6 +9,11 @@
 <h1>Bienvenido, ${usuario}!</h1>
 <p>Este es tu panel de usuario.</p>
 
+<!-- Botón para registrar reciclaje -->
+<a href="/user/reciclaje/registrar">
+    <button>Registrar Reciclaje</button>
+</a>
+
 <!-- Formulario POST para cerrar sesión -->
 <form action="/logout" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}" />

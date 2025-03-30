@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclajes Pendientes</title>
+</head>
+<body>
+<h2>Reciclajes Pendientes</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Material</th>
+        <th>Cantidad</th>
+        <th>Unidad</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 🔥 Iterar sobre la lista de reciclajes -->
+    <tr th:each="reciclaje : ${reciclajes}">
+        <td th:text="${reciclaje.id}"></td>
+        <td th:text="${reciclaje.usuario.username}"></td>
+        <td th:text="${reciclaje.material}"></td>
+        <td th:text="${reciclaje.cantidad}"></td>
+        <td th:text="${reciclaje.unidad}"></td>
+        <td th:text="${reciclaje.fecha}"></td>
+        <td>
+            <form th:action="@{/empresa-recolectora/aprobar/{id}(id=${reciclaje.id})}" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> <!-- Token CSRF si está activado -->
+                <button type="submit">Aprobar</button>
+            </form>
+
+            <form th:action="@{/empresa-recolectora/rechazar/{id}(id=${reciclaje.id})}" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                <button type="submit">Rechazar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/empresa-recolectora/dashboard">Volver al Dashboard</a>
+
+</body>
+</html>
