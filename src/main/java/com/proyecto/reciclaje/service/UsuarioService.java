@@ -29,5 +29,13 @@ public class UsuarioService {
     // Nuevo método para verificar si el usuario ya existe en la base de datos
     public boolean existeUsuario(String username) {
         return usuarioRepository.findByUsername(username).isPresent();
+
     }
-}
+    // 🔥 Nuevo método para actualizar usuario
+    public Usuario actualizarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+
+        }
+
+    }
+

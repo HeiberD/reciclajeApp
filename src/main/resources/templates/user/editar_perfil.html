@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Perfil</title>
+</head>
+<body>
+<h2>Ver Perfil</h2>
+
+<form>
+    <label>Nombre de usuario:</label>
+    <input type="text" name="username" th:value="${usuario.username}" readonly />
+    <br><br>
+
+    <label>Rol:</label>
+    <input type="text" readonly
+           th:value="${usuario.role == 'ADMIN' ? 'Administrador' : (usuario.role == 'USUARIO' ? 'Usuario' : 'Empresa Recolectora')}" />
+    <br><br>
+
+    <a href="/auth/cambiar-contrasena">
+        <button type="button">Cambiar contraseña</button>
+    </a>
+</form>
+
+<a href="/user/dashboard">Volver al Dashboard</a>
+</body>
+</html>

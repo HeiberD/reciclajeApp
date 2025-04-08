@@ -4,12 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Reciclaje</title>
+    <script>
+        function toggleSubtipo() {
+            const tipo = document.getElementById("tipoResiduo").value;
+            const subtipoDiv = document.getElementById("subTipoContainer");
+            subtipoDiv.style.display = (tipo === "ORGÁNICO") ? "block" : "none";
+        }
+    </script>
 </head>
 <body>
 <h2>Registrar Reciclaje</h2>
 <form action="/user/reciclaje/registrar" method="post">
-    <!-- 🔥 Token CSRF obligatorio para evitar el error 403 -->
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+    <label>Tipo de Residuo:</label>
+    <select name="tipoResiduo" id="tipoResiduo" onchange="toggleSubtipo()" required>
+        <option value="">Selecciona...</option>
+        <option value="ORGÁNICO">Orgánico</option>
+        <option value="INORGÁNICO">Inorgánico</option>
+        <option value="PELIGROSO">Peligroso</option>
+    </select>
+    <br>
+
+    <div id="subTipoContainer" style="display: none;">
+        <label>Subtipo (solo si es orgánico):</label>
+        <select name="subTipoResiduo">
+            <option value="">Selecciona...</option>
+            <option value="FRACCIÓN ORGÁNICA">Fracción Orgánica</option>
+            <option value="FRACCIÓN VEGETAL">Fracción Vegetal</option>
+            <option value="RESIDUOS DE PODA">Residuos de Poda</option>
+        </select>
+        <br>
+    </div>
 
     <label>Material:</label>
     <input type="text" name="material" required>

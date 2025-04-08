@@ -25,6 +25,9 @@ public class Usuario {
     @Column(nullable = false)
     private String role; // ADMIN, USUARIO, EMPRESA_RECOLECTORA
 
+    @Column(nullable = false)
+    private int puntos = 0; // ✅ Nuevo campo: puntos acumulados
+
     // Métodos getter y setter manuales
     public Long getId() {
         return this.id;
@@ -56,5 +59,13 @@ public class Usuario {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuración del Sistema</title>
+</head>
+<body>
+<h2>Configuración Global del Sistema</h2>
+
+<!-- ✅ Mensaje de éxito si se redirige con ?success -->
+<div th:if="${param.success}" style="color: green; font-weight: bold;">
+    ✅ Configuración actualizada correctamente.
+</div>
+
+<form th:action="@{/admin/configuracion/actualizar}" method="post">
+    <label for="puntosPorRecoleccionExitosa">Puntos por Recolección Exitosa:</label>
+    <input type="number" id="puntosPorRecoleccionExitosa" name="puntosPorRecoleccionExitosa"
+           th:value="${configuracion.puntosPorRecoleccionExitosa}" required min="0"/>
+    <br><br>
+
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+<br>
+<a href="/admin/dashboard">Volver al Dashboard</a>
+</body>
+</html>

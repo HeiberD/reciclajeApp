@@ -6,12 +6,46 @@
     <title>Panel de Usuario</title>
 </head>
 <body>
-<h1>Bienvenido, ${usuario}!</h1>
+<h1 th:text="'Bienvenido, ' + ${usuario.username} + '!'">Bienvenido, Usuario</h1>
+
+<!-- ✅ Mensaje de éxito si se redirige con ?success -->
+<div id="mensajeExito" th:if="${param.success}" style="color: green; font-weight: bold;">
+    ♻️ ¡Reciclaje registrado exitosamente!
+</div>
+
+<!-- ✅ Script para ocultar el mensaje después de 3 segundos -->
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        const mensaje = document.getElementById("mensajeExito");
+        if (mensaje) {
+            setTimeout(() => {
+                mensaje.style.display = "none";
+            }, 5000); // 5 segundos
+        }
+    });
+</script>
+
 <p>Este es tu panel de usuario.</p>
 
 <!-- Botón para registrar reciclaje -->
 <a href="/user/reciclaje/registrar">
     <button>Registrar Reciclaje</button>
+</a>
+
+<!-- 🔥 Botón para ver historial -->
+<br><br>
+<a href="/user/reciclaje/historial">
+    <button>Ver Historial de Reciclaje</button>
+</a>
+
+<!-- 🔥 Nuevos botones -->
+<br><br>
+<a href="/auth/perfil">
+    <button>Ver Perfil</button>
+</a>
+
+<a href="/auth/cambiar-contrasena">
+    <button>Cambiar Contraseña</button>
 </a>
 
 <!-- Formulario POST para cerrar sesión -->

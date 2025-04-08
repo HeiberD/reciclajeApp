@@ -16,6 +16,8 @@
         <th>Material</th>
         <th>Cantidad</th>
         <th>Unidad</th>
+        <th>Tipo de Residuo</th> <!-- ✅ Nuevo -->
+        <th>Subtipo</th>          <!-- ✅ Nuevo -->
         <th>Fecha</th>
         <th>Acciones</th>
     </tr>
@@ -28,15 +30,15 @@
         <td th:text="${reciclaje.material}"></td>
         <td th:text="${reciclaje.cantidad}"></td>
         <td th:text="${reciclaje.unidad}"></td>
+        <td th:text="${reciclaje.tipoResiduo}"></td>       <!-- Nuevo -->
+        <td th:text="${reciclaje.subTipoResiduo} ?: 'N/A'"></td> <!-- Nuevo -->
         <td th:text="${reciclaje.fecha}"></td>
         <td>
             <form th:action="@{/empresa-recolectora/aprobar/{id}(id=${reciclaje.id})}" method="post">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> <!-- Token CSRF si está activado -->
                 <button type="submit">Aprobar</button>
             </form>
 
             <form th:action="@{/empresa-recolectora/rechazar/{id}(id=${reciclaje.id})}" method="post">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                 <button type="submit">Rechazar</button>
             </form>
         </td>

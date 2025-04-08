@@ -13,7 +13,15 @@
 <ul>
     <li><a href="/admin/gestionar-usuarios">Gestionar Usuarios</a></li>
     <li><a href="/admin/reporte-reciclaje">Ver Reportes</a></li>
-    <li><a href="/logout">Cerrar sesión</a></li>
+
+    <!-- ✅ Nuevo botón para configuración del sistema -->
+    <li><a href="/admin/configuracion">Configuración del Sistema</a></li>
+
+    <li>
+        <form action="/logout" method="post" style="display:inline;">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </li>
 </ul>
 </body>
 </html>

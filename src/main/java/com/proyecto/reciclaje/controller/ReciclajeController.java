@@ -22,25 +22,28 @@ public class ReciclajeController {
     @Autowired
     private UsuarioService usuarioService;
 
+    // Mostrar formulario para registrar un nuevo reciclaje
     @GetMapping("/registrar")
     public String mostrarFormularioRegistro(Model model) {
         model.addAttribute("reciclaje", new Reciclaje());
-        return "user/registrar_reciclaje"; // 🔥 Asegúrate de tener esta vista
+        return "user/registrar_reciclaje"; // Vista del formulario
     }
 
+    // Procesar el registro de reciclaje
     @PostMapping("/registrar")
     public String registrarReciclaje(@ModelAttribute Reciclaje reciclaje, Authentication authentication) {
         Usuario usuario = usuarioService.buscarPorUsername(authentication.getName()).orElseThrow();
         reciclaje.setUsuario(usuario);
         reciclajeService.registrarReciclaje(reciclaje);
-        return "redirect:/user/reciclaje/historial";
+        return "redirect:/user/dashboard?success"; // ✅ Redirige al panel del usuario, no al historial
     }
 
+    // Mostrar historial de reciclajes del usuario
     @GetMapping("/historial")
     public String verHistorialReciclaje(Model model, Authentication authentication) {
         Usuario usuario = usuarioService.buscarPorUsername(authentication.getName()).orElseThrow();
         List<Reciclaje> historial = reciclajeService.obtenerReciclajePorUsuario(usuario);
         model.addAttribute("historial", historial);
-        return "user/historial_reciclaje"; // 🔥 Asegúrate de tener esta vista
+        return "user/historial_reciclaje"; // Vista para mostrar el historial
     }
 }
